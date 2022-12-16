@@ -3,6 +3,7 @@ import json
 
 from selenium_tests.utilities.configuration import Configuration
 
+
 # abs_path = '/Users/max/PycharmProjects/selenium_ui_automation_tests/selenium_tests/configurations/configuration.ini'
 # conf = configparser.RawConfigParser()
 # conf.read(abs_path)
@@ -24,8 +25,8 @@ class ReadConfig:
     # @staticmethod
     # def get_browser_data():
     #     return conf.get('browser_data', 'browser_id')
+    # scope = "session"
 
-    # scope="session"
     @staticmethod
     def env():
         with open(

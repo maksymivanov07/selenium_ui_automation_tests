@@ -1,8 +1,10 @@
 from selenium.webdriver.common.by import By
 
+from selenium_tests.utilities.decorators import auto_step
 from selenium_tests.utilities.web_ui.base_page import BasePage
 
 
+@auto_step
 class AboutPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)

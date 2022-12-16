@@ -1,8 +1,11 @@
 from http import HTTPStatus
 
+import pytest
+
 from api_collections.user_collection import ReqRes
 
 
+@pytest.mark.regression
 def test_get_user_by_id():
     """
     Make request on endpoint and get user if exist
@@ -12,6 +15,7 @@ def test_get_user_by_id():
     assert response.status_code == HTTPStatus.OK
 
 
+@pytest.mark.smoke
 def test_register_user():
     """
       note: This API pass only one defined user.
@@ -22,6 +26,7 @@ def test_register_user():
     assert response.status_code == HTTPStatus.OK
 
 
+@pytest.mark.smoke
 def test_delete_user():
     """
        note: Make request on endpoint by user id and delete it if exist

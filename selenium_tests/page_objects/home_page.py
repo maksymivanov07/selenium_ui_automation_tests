@@ -1,8 +1,10 @@
 from selenium.webdriver.common.by import By
 
+from selenium_tests.utilities.decorators import auto_step
 from selenium_tests.utilities.web_ui.base_page import BasePage
 
 
+@auto_step
 class HomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
@@ -21,8 +23,10 @@ class HomePage(BasePage):
     __error_last_name = (By.XPATH, "//label[@id='REGISTER[LAST_NAME]-error']")
     __error_email = (By.XPATH, "//label[@id='REGISTER[EMAIL]-error']")
     __error_password = (By.XPATH, "//label[@id='REGISTER[PASSWORD]-error']")
-    __error_password_is_empty = (By.XPATH, "//label[@id='REGISTER[CONFIRM_PASSWORD]-error'][text()='Поле підтвердження паролю не заповнено']")
-    __error_password_is_not_equal = (By.XPATH, "//label[@id='REGISTER[CONFIRM_PASSWORD]-error'][text()='Паролі не збігаються']")
+    __error_password_is_empty = (
+    By.XPATH, "//label[@id='REGISTER[CONFIRM_PASSWORD]-error'][text()='Поле підтвердження паролю не заповнено']")
+    __error_password_is_not_equal = (
+    By.XPATH, "//label[@id='REGISTER[CONFIRM_PASSWORD]-error'][text()='Паролі не збігаються']")
     __error_phone_number = (By.XPATH, "//font[@class='errortext']")
     __logout_button = (By.XPATH, "//a[@href='/ua/?logout=yes']")
 
@@ -71,7 +75,6 @@ class HomePage(BasePage):
     def is_error_phone_number_visible(self):
         return self._is_visible(self.__error_phone_number)
 
-
     def click_register(self):
         self._click(self.__registrate_button)
         return self
@@ -91,4 +94,3 @@ class HomePage(BasePage):
     def is_logout_button_visible(self):
         self._is_visible(self.__logout_button)
         return self
-

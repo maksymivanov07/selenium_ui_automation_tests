@@ -1,6 +1,8 @@
 from api_collections.base_api import BaseAPI
+from selenium_tests.utilities.decorators import auto_step
 
 
+@auto_step
 class ReqRes(BaseAPI):
     def __init__(self):
         super().__init__()
