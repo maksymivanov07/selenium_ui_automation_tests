@@ -1,8 +1,10 @@
 from selenium.webdriver.common.by import By
 
+from selenium_tests.utilities.decorators import auto_step
 from selenium_tests.utilities.web_ui.base_page import BasePage
 
 
+@auto_step
 class UserProfilePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
@@ -117,5 +119,3 @@ class UserProfilePage(BasePage):
 
     def is_new_name_visible(self):
         return self._is_visible(self.__new_name)
-
-

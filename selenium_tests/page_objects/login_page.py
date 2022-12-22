@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
 
 from selenium_tests.page_objects.home_page import HomePage
+from selenium_tests.utilities.decorators import auto_step
 from selenium_tests.utilities.web_ui.base_page import BasePage
 
 
+@auto_step
 class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
@@ -61,4 +63,3 @@ class LoginPage(BasePage):
     def login(self, email, password):
         self.set_auth_email(email).set_auth_password(password).click_login()
         return HomePage(self._driver)
-

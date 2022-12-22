@@ -1,7 +1,10 @@
 from selenium_tests.configurations.configuratin_api import BASE_URL
 import requests
 
+from selenium_tests.utilities.decorators import auto_step
 
+
+@auto_step
 class BaseAPI:
     def __init__(self):
         self.__base_url = BASE_URL
