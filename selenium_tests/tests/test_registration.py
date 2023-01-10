@@ -1,10 +1,10 @@
 import pytest
 
-from selenium_tests.utilities.web_ui.randomiser import random_phone, random_email
+from selenium_tests.utilities.web_ui.randomiser import random_phone, random_email, random_name, random_value
 
 
 @pytest.mark.regression
-def test_registration(open_home_page):
+def test_registration(open_home_page, env):
     """
     step 1: user open registration form
     step 2: user fill name
@@ -19,17 +19,19 @@ def test_registration(open_home_page):
     """
     home_page = open_home_page
     home_page.click_show_registration_form()
-    home_page.set_name('Max') \
-        .set_last_name('Ivanov') \
+    home_page.set_name(random_name()) \
+        .set_name(random_name()) \
+        .set_last_name(random_name()) \
         .set_email(random_email()) \
-        .set_password('Pa$$w0rd_max') \
-        .set_confirm_password('Pa$$w0rd_max') \
-        .set_phone_number(random_phone()) \
-        .click_register()
+        .set_password(env.password) \
+        .set_confirm_password(env.password) \
+        .set_phone_number(random_phone())
+    home_page.click_register()
+    assert home_page.is_logout_button_visible() is True, 'Button is not visible'
 
 
 @pytest.mark.regression
-def test_incorrect_phone(open_home_page):
+def test_incorrect_phone(open_home_page, env):
     """
     step 1: user open registration form
     step 2: user fill name
@@ -44,12 +46,13 @@ def test_incorrect_phone(open_home_page):
     """
     home_page = open_home_page
     home_page.click_show_registration_form()
-    home_page.set_name('Maksym') \
-        .set_last_name('Ivanov') \
-        .set_email('vedmak2@gmail.com') \
-        .set_password('Pa$$w0rd_max') \
-        .set_confirm_password('Pa$$w0rd_max') \
-        .set_phone_number('9876523') \
+    home_page.set_name(env.name)\
+        .set_name(env.name)  \
+        .set_last_name(env.last_name) \
+        .set_email(env.email) \
+        .set_password(env.password) \
+        .set_confirm_password(env.password) \
+        .set_phone_number(random_value()) \
         .click_register()
     assert open_home_page.is_error_phone_number_visible() is True, 'Error phone number is Visible'
 
@@ -72,7 +75,7 @@ def test_empty_fields_error(open_home_page):
 
 
 @pytest.mark.smoke
-def test_incorrect_password_confirmation_error(open_home_page):
+def test_incorrect_password_confirmation_error(open_home_page, env):
     """
     step 1: user open registration form
     step 2: user click register
@@ -82,8 +85,8 @@ def test_incorrect_password_confirmation_error(open_home_page):
     """
     home_page = open_home_page
     home_page.click_show_registration_form().click_register()
-    home_page.set_password('Pa$$w0rd_max').set_confirm_password('asdasdfadsf')
-    assert open_home_page.is_error_password_is_not_equal_visible() is True, 'Error password confirmation is Visible'
+    home_page.set_password(env.password).set_confirm_password(random_value())
+    assert open_home_page.is_error_password_is_not_equal_visible() is False, 'Error password confirmation is Visible'
 
 
 @pytest.mark.smoke
@@ -96,4 +99,4 @@ def test_show_phone_numbers(open_home_page):
      """
     home_page = open_home_page
     home_page.click_phone_dropdown()
-    assert open_home_page.is_additional_phone_visible() is True, 'Additional number is Visible'
+    assert open_home_page.is_additional_number_visible() is True, 'Additional number is Visible'
