@@ -1,10 +1,10 @@
 import json
-import os
 from contextlib import suppress
 
 import pytest
 import allure
 
+from CONSTANTS import ROOT_DIR
 from selenium_tests.page_objects.home_page import HomePage
 from selenium_tests.utilities.configuration import Configuration
 from selenium_tests.utilities.driver_factory import DriverFactory
@@ -22,11 +22,9 @@ def pytest_runtest_makereport(item, call):
 
 @pytest.fixture()
 def env():
-    dir_contain_file = '/Users/max/PycharmProjects/selenium_ui_automation_tests/selenium_tests/configurations'
-    os.chdir(dir_contain_file)
-    file_name = 'configuration.json'
+    abs_path = f'{ROOT_DIR}/selenium_tests/configurations/configuration.json'
 
-    with open(file_name) as f:
+    with open(abs_path) as f:
         data = f.read()
         json_to_dict = json.loads(data)
     return Configuration(**json_to_dict)
@@ -94,10 +92,10 @@ def open_item_modal_window(open_home_page):
 def login_user(open_login_modal_window, env):
     login_user = open_login_modal_window
     wait_until(lambda: login_user.is_login_button_visible(), 'Visible')
-    login_user\
-        .set_auth_email(env.email)\
-        .set_auth_email(env.email)\
-        .set_auth_password(env.password)\
+    login_user \
+        .set_auth_email(env.email) \
+        .set_auth_email(env.email) \
+        .set_auth_password(env.password) \
         .click_login()
     return login_user
 
