@@ -18,9 +18,9 @@ def test_add_item_to_cart(open_item_modal_window):
     else:
         checkout_page \
             .click_size_menu() \
-            .click_choose_size() \
-            .click_add_to_cart_button()
-
+            .click_choose_size()\
+            .click_add_to_cart_button()\
+            .click_go_to_checkout()
     assert checkout_page.is_checkout_button_visible() is True, 'Button checkout is not visible'
 
 
