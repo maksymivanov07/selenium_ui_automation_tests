@@ -19,6 +19,7 @@ class CheckoutPage(BasePage):
     __button_add_to_cart = (By.XPATH, "//div[@id='element_buy_button']")
     __button_add_to_fav = (By.XPATH, "//span[@class='favorSpan']")
     __fav_counter = (By.XPATH, "//span[@class='col'][text()='1']")
+    __click_go_to_checkout = (By.XPATH, "//div[@class='small_basket_content']//a[@href='/ua/personal/order/make/']")
 
     def click_add_item_to_fav(self):
         """
@@ -58,6 +59,14 @@ class CheckoutPage(BasePage):
         :return: self
         """
         self._click(self.__click_make_order)
+        return self
+
+    def click_go_to_checkout(self):
+        """
+        Wait for element and click when it would visible
+        :return: self
+        """
+        self._click(self.__click_go_to_checkout)
         return self
 
     def is_checkout_button_visible(self):
